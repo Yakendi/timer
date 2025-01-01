@@ -1,32 +1,29 @@
-import { useState, useRef, useEffect } from "react";
-import { StartStopButton } from "../../entities/StartStopButton";
+import { useState, useRef, useEffect } from 'react';
+import { StartStopButton } from '../../entities/StartStopButton';
 
 export function StartStopTimer() {
-    const [timerState, setTimerState] = useState("stopped")
-    const [elapsedTime, setElapsedTime] = useState(0)
+    const [timerState, setTimerState] = useState('stopped');
+    const [elapsedTime, setElapsedTime] = useState(0);
 
     function handleStartStop() {
-        if (timerState === "stopped" || timerState === "paused") {
-            setTimerState("running");
-        } else if (timerState === "running") {
-            setTimerState("paused");
+        if (timerState === 'stopped' || timerState === 'paused') {
+            setTimerState('running');
+        } else {
+            setTimerState('paused');
         }
     }
 
-    const buttonText = 
-        timerState === "stopped" ? "Start" :
-        timerState === "running" ? "Pause" : 
-        "Resume";
+    const buttonText = timerState === 'stopped' ? 'Start' : timerState === 'running' ? 'Pause' : 'Resume';
 
     useEffect(() => {
-        if(timerState === "running") {
-            setInterval(() => {
-                setElapsedTime(Date.now() + 10)
+        if (timerState === 'running') {
+            const interval = setInterval(() => {
+                setElapsedTime(Date.now() + 10);
             }, 10);
-        }
-    }, [timerState])
 
-    return (
-        <StartStopButton onClick = { handleStartStop } children = { buttonText } />
-    )
+            return () => clearInterval(interval);
+        }
+    }, [timerState]);
+
+    return <StartStopButton onClick={handleStartStop} children={buttonText} />;
 }
