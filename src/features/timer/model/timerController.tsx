@@ -1,12 +1,13 @@
 import { useTimer } from './useTimer';
 
 export const TimerController = () => {
-    const { time, isRunning, toggleTimer, resetTimer } = useTimer();
+    const { time, isDisabled, toggleTimer, buttonText, resetTimer } = useTimer();
 
     return {
         time,
-        isRunning,
+        isDisabled,
         toggleTimer,
+        buttonText,
         resetTimer,
     };
 };
