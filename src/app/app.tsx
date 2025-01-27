@@ -1,13 +1,15 @@
 import { SApp } from './styles/app.styles';
 import { ThemeProvider } from 'styled-components';
 import theme from '../constants/constants.styles';
-import { Timer } from '../pages/Timer';
+import { AppRouter } from './routes/routes';
+import { Header } from '../widgets/Header/Header';
 
 export function App() {
     return (
         <ThemeProvider theme={theme}>
             <SApp>
-                <Timer />
+                <Header />
+                <AppRouter />
             </SApp>
         </ThemeProvider>
     );

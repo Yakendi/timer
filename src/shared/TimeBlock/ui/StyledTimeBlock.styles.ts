@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import theme from "../../../constants/constants.styles";
 
 const StyledTimeBlock = styled.div`
-    width: 32%;
+    width: 100%;
     height: 250px;
     padding: 10px;
     border-radius: 12px;
     font-size: 11em;
     font-weight: 400;
     text-align: center;
-    color: ${(props => props.theme.colors.buttonColor)};
-    background-color: ${(props) => props.theme.colors.primary};
+    color: ${theme.colors.secondary};
+    background-color: ${theme.colors.primary};
 `
 
 export default StyledTimeBlock

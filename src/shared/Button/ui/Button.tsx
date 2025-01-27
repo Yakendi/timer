@@ -3,11 +3,11 @@ import StyledButton from "./StyledButton.styles"
 export function Button({
         onClick, 
         children, 
-        disabled = false
+        disabled
     }: {
-        onClick: () => void, 
+        onClick?: () => void, 
         children: string, 
-        disabled: boolean
+        disabled?: boolean
     }) {
     return (
         <StyledButton onClick={onClick} disabled = {disabled}>

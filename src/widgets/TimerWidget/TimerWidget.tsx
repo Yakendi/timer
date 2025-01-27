@@ -1,18 +1,15 @@
-import React from "react";
 import { TimerController } from "../../features/timer/model/timerController";
-import { ButtonsContainer } from "../ButtonsContainer";
-import { TimerContainer } from "../TimerContainer";
+import { TimerButtonsContainer } from "./TimerButtonsContainer";
+import { TimerContainer } from "./TimerContainer";
 
-function TimerWidget() {
+export function TimerWidget() {
     const {time, toggleTimer, buttonText, resetTimer, isDisabled} = TimerController()
     return (
         <>
             <TimerContainer>{time}</TimerContainer>
-            <ButtonsContainer toggleTimer={toggleTimer} resetTimer={resetTimer} disabled={isDisabled}>
+            <TimerButtonsContainer toggleTimer={toggleTimer} resetTimer={resetTimer} disabled={isDisabled}>
                 {buttonText()}
-            </ButtonsContainer>
+            </TimerButtonsContainer>
         </>
     )
 }
-
-export default React.memo(TimerWidget)

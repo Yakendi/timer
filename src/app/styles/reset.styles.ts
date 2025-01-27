@@ -89,4 +89,17 @@ label {
 legend {
 	display: block;
 }
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Для Firefox */
+    -webkit-appearance: none; /* Для Chrome, Safari, Edge */
+    appearance: none; /* Для современных браузеров */
+    margin: 0; /* Чтобы убрать дополнительные отступы */
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `

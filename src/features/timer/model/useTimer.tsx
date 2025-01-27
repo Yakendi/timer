@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useInterval } from '../../../shared/lib/hooks/useInterval';
 
-export const useTimer = () => {
-    const [time, setTimer] = useState<number>(0);
+export const useTimer = (initialTime: number = 0, isCountdown: boolean = false) => {
+    const [time, setTimer] = useState<number>(initialTime);
     const [isRunning, setIsRunning] = useState<boolean>(false);
-    const [timerState, setTimerState] = useState<string>("stopped")
-    const [isDisabled, setIsDisabled] = useState<boolean>(true)
+    const [timerState, setTimerState] = useState<string>('stopped');
+    const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
     const toggleTimer = () => {
         if (timerState === 'stopped' || timerState === 'paused') {
@@ -16,6 +16,20 @@ export const useTimer = () => {
             setTimerState('paused');
             setIsRunning(false);
         }
+    };
+
+    const resetTimer = () => {
+        setTimer(initialTime);
+        setTimerState('stopped');
+        setIsRunning(false);
+        setIsDisabled(true);
+    };
+
+    const setInitialTime = (newInitialTime: number) => {
+        setTimer(newInitialTime);
+        setTimerState('stopped');
+        setIsRunning(false);
+        setIsDisabled(true);
     };
 
     const buttonText = () => {
@@ -31,20 +45,24 @@ export const useTimer = () => {
         }
     };
 
-    useInterval(
-        () => {
-            console.log("run");
-            setTimer(prev => prev + 10);
-        },
-        isRunning ? 10 : null
-    );
+        useInterval(
+            () => {
+                setTimer((prev) => {
+                    if (isCountdown) {
+                        const nextTime = prev - 0.01;
+                        if (nextTime <= 0) {
+                            setIsRunning(false);
+                            setTimerState('stopped');
+                            return 0;
+                        }
+                        return nextTime;
+                    } else {
+                        return prev + 10;
+                    }
+                });
+            },
+            isRunning ? 10 : null
+        );
 
-    const resetTimer = () => {
-        setTimer(0);
-        setTimerState('stopped');
-        setIsRunning(false);
-        setIsDisabled(true);
-    };
-
-    return { time, isDisabled, toggleTimer, buttonText, resetTimer };
+    return { time, isDisabled, timerState, toggleTimer, resetTimer, setInitialTime, buttonText };
 };
