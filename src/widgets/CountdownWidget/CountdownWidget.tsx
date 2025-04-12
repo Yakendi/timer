@@ -1,4 +1,3 @@
-import { CircularProgress, LinearProgress, Slider } from "@mui/material";
 import { useInput } from "../../features/input/model/useInput";
 import { useTimer } from "../../features/timer/model/useTimer";
 import { CountdownContainer } from "./CountdownContainer";
